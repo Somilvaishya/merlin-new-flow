@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Merlin — Modular Workflow v2.0</title>
+<title>Merlin — Modular Workflow v2.1</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -24,6 +24,7 @@
   --red: #a02828; --red-bg: #fceaea; --red-bd: #e08888;
   --blue: #1a5fa0; --blue-bg: #e6f0fb; --blue-bd: #90b8e0;
   --indigo: #3b3fa0; --indigo-bg: #ebebf8; --indigo-bd: #b0b0e0;
+  --rose: #8b2252; --rose-bg: #f9e8f0; --rose-bd: #d890b8;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -57,19 +58,17 @@ body {
 .eyebrow { font-size: 10px; color: #5a5448; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
 .sub-line { font-size: 10px; color: #5a5448; margin-top: 8px; letter-spacing: 0.06em; }
 
-/* ── NAV PILLS ── */
-.module-nav {
-  background: var(--ink);
-  padding: 0 48px 24px;
-  display: flex; flex-wrap: wrap; gap: 8px;
+/* ── CHANGE LOG BANNER ── */
+.changelog-banner {
+  background: linear-gradient(135deg, #1c1a16 0%, #2a2620 100%);
+  border-bottom: 1px solid #3a3628;
+  padding: 14px 48px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
 }
-.nav-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 14px; border-radius: 3px; border: 1px solid;
-  font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
-  text-decoration: none; cursor: pointer; transition: all 0.15s;
-}
-.nav-pill:hover { transform: translateY(-1px); }
+.cl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.cl-text { font-size: 10px; color: #a09880; letter-spacing: 0.06em; }
+.cl-text strong { color: var(--gold); font-weight: 600; }
+.cl-tag { font-size: 9px; padding: 2px 8px; border-radius: 2px; background: rgba(232,184,74,0.12); border: 1px solid rgba(232,184,74,0.3); color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
 
 /* ── MAIN LAYOUT ── */
 .page-body { display: flex; }
@@ -92,6 +91,7 @@ body {
 .sb-item:hover { color: #f5f0e8; border-color: #3a3830; }
 .sb-item.active { color: #f5f0e8; background: #26231e; border-color: #3a3830; }
 .sb-dot { display: inline-block; width: 7px; height: 7px; border-radius: 1px; margin-right: 7px; flex-shrink: 0; }
+.sb-item .sb-new { font-size: 7px; letter-spacing: 0.12em; background: rgba(232,184,74,0.18); border: 1px solid rgba(232,184,74,0.35); color: var(--gold); padding: 1px 5px; border-radius: 2px; margin-left: 4px; text-transform: uppercase; vertical-align: middle; }
 
 /* ── CONTENT ── */
 .content { flex: 1; padding: 48px; overflow-x: hidden; }
@@ -133,6 +133,34 @@ body {
 .step-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
 .step-chip { font-size: 10px; padding: 3px 8px; border-radius: 3px; border: 1px solid; }
 
+/* NEW ADDITION: enhanced inline block */
+.addition-block {
+  width: 100%; max-width: 680px;
+  border-radius: 8px;
+  border: 1.5px solid var(--gold);
+  background: linear-gradient(135deg, rgba(232,184,74,0.06) 0%, rgba(232,184,74,0.02) 100%);
+  padding: 16px 20px;
+  position: relative;
+  animation: fadeUp 0.4s both;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.addition-block:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,184,74,0.12); }
+.addition-block::before {
+  content: 'NEW · 25 MAY 2026';
+  position: absolute; top: -10px; left: 16px;
+  background: var(--gold); color: var(--ink);
+  font-size: 8px; font-weight: 700; letter-spacing: 0.14em;
+  padding: 2px 8px; border-radius: 2px;
+}
+.addition-block .ab-label { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; color: var(--amber); margin-bottom: 4px; margin-top: 4px; opacity: 0.8; }
+.addition-block .ab-title { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--amber); line-height: 1.2; margin-bottom: 4px; }
+.addition-block .ab-sub { font-size: 11px; color: var(--ink); opacity: 0.7; line-height: 1.6; }
+.addition-block .ab-list { list-style: none; padding: 0; margin-top: 8px; }
+.addition-block .ab-list li { font-size: 10.5px; padding: 3px 0 3px 16px; position: relative; color: var(--amber); opacity: 0.85; }
+.addition-block .ab-list li::before { content: '◆'; position: absolute; left: 0; font-size: 7px; top: 5px; opacity: 0.6; }
+.addition-block .ab-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.addition-block .ab-chip { font-size: 9.5px; padding: 2px 8px; border-radius: 2px; background: rgba(232,184,74,0.12); border: 1px solid rgba(232,184,74,0.3); color: var(--amber); font-weight: 600; }
+
 /* step colors */
 .s-teal   { background: var(--teal-bg);   border-color: var(--teal-bd);   color: var(--teal);   }
 .s-purple { background: var(--purple-bg); border-color: var(--purple-bd); color: var(--purple); }
@@ -143,6 +171,7 @@ body {
 .s-red    { background: var(--red-bg);    border-color: var(--red-bd);    color: var(--red);    }
 .s-blue   { background: var(--blue-bg);   border-color: var(--blue-bd);   color: var(--blue);   }
 .s-indigo { background: var(--indigo-bg); border-color: var(--indigo-bd); color: var(--indigo); }
+.s-rose   { background: var(--rose-bg);   border-color: var(--rose-bd);   color: var(--rose);   }
 
 /* connector */
 .conn { display: flex; flex-direction: column; align-items: center; }
@@ -203,6 +232,20 @@ body {
 .card ul li { font-size: 10px; opacity: 0.68; padding: 2px 0 2px 12px; position: relative; }
 .card ul li::before { content: '·'; position: absolute; left: 0; opacity: 0.5; }
 
+/* NEW card variant with gold border */
+.card-new {
+  border-color: rgba(232,184,74,0.5) !important;
+  background: linear-gradient(135deg, rgba(232,184,74,0.06), rgba(232,184,74,0.02)) !important;
+  position: relative;
+}
+.card-new::after {
+  content: 'NEW';
+  position: absolute; top: -8px; right: 10px;
+  background: var(--gold); color: var(--ink);
+  font-size: 7px; font-weight: 700; letter-spacing: 0.14em;
+  padding: 1px 6px; border-radius: 2px;
+}
+
 /* branch divider svg helper */
 .branch-split { width: 100%; max-width: 680px; overflow: visible; display: block; height: 20px; }
 
@@ -220,6 +263,34 @@ body {
 /* note */
 .note { font-size: 10px; padding: 5px 12px; border-radius: 3px; border: 1px solid; letter-spacing: 0.03em; display: inline-block; }
 
+/* FG tracker bar (new) */
+.fg-tracker {
+  width: 100%; max-width: 680px;
+  background: linear-gradient(90deg, var(--teal-bg), var(--indigo-bg));
+  border: 1.5px solid var(--teal-bd);
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 10.5px;
+}
+.fg-tracker-title {
+  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 700; color: var(--teal); margin-bottom: 8px;
+}
+.fg-stages {
+  display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+}
+.fg-stage {
+  display: flex; align-items: center; gap: 0;
+}
+.fg-stage-box {
+  font-size: 9.5px; padding: 4px 10px; border-radius: 3px;
+  border: 1px solid var(--teal-bd); background: var(--teal-bg);
+  color: var(--teal); font-weight: 600; white-space: nowrap;
+}
+.fg-arrow {
+  font-size: 11px; color: var(--border); padding: 0 4px;
+}
+
 @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 /* responsive */
@@ -232,6 +303,8 @@ body {
 @media (max-width: 600px) {
   .g-2, .g-3, .g-4 { grid-template-columns: 1fr; }
   .branch { flex-direction: column; }
+  .fg-stages { flex-direction: column; align-items: flex-start; }
+  .changelog-banner { padding: 12px 20px; }
 }
 
 /* scrollbar */
@@ -239,8 +312,9 @@ body {
 .sidebar::-webkit-scrollbar-track { background: transparent; }
 .sidebar::-webkit-scrollbar-thumb { background: #3a3830; border-radius: 2px; }
 
-/* highlight "NEW" badge */
+/* highlight badges */
 .badge-new { background: #2a6b3030; border: 1px solid var(--green-bd); color: var(--green); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; padding: 2px 7px; border-radius: 2px; }
+.badge-upd { background: rgba(232,184,74,0.12); border: 1px solid rgba(232,184,74,0.35); color: var(--gold); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; padding: 2px 7px; border-radius: 2px; }
 
 /* footer */
 .page-footer { background: var(--ink); padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 2px solid var(--accent); }
@@ -256,22 +330,33 @@ body {
   <div class="header-top">
     <div>
       <div class="eyebrow">Business Workflow · ERPNext v16 · Frappe Framework</div>
-      <div class="brand">Merlin<em>.</em> <span class="badge">v2.0 — Post MOM</span></div>
-      <div class="sub-line">Stainless Steel Vessel Bottles · Modular Process Flows · 06 May 2025</div>
+      <div class="brand">Merlin<em>.</em> <span class="badge">v2.1 — 25 May 2026 Update</span></div>
+      <div class="sub-line">Stainless Steel Vessel Bottles · Modular Process Flows · Updated 25/05/2026 at Merlin Office</div>
     </div>
     <div style="display:flex;flex-direction:column;gap:6px;align-self:flex-end;">
-      <div style="font-size:9px;color:#5a5448;letter-spacing:0.12em;text-transform:uppercase;">12 Modules · All Flows Separated</div>
+      <div style="font-size:9px;color:#5a5448;letter-spacing:0.12em;text-transform:uppercase;">13 Modules · 5 New Additions · 25 May 2026</div>
       <div style="display:flex;flex-wrap:wrap;gap:5px;max-width:360px;">
         <span style="font-size:10px;padding:2px 8px;border-radius:2px;background:var(--teal-bg);border:1px solid var(--teal-bd);color:var(--teal);">Procurement</span>
         <span style="font-size:10px;padding:2px 8px;border-radius:2px;background:var(--indigo-bg);border:1px solid var(--indigo-bd);color:var(--indigo);">Manufacturing</span>
         <span style="font-size:10px;padding:2px 8px;border-radius:2px;background:var(--purple-bg);border:1px solid var(--purple-bd);color:var(--purple);">Subcontracting</span>
-        <span style="font-size:10px;padding:2px 8px;border-radius:2px;background:var(--amber-bg);border:1px solid var(--amber-bd);color:var(--amber);">Sales & Orders</span>
+        <span style="font-size:10px;padding:2px 8px;border-radius:2px;background:var(--amber-bg);border:1px solid var(--amber-bd);color:var(--amber);">Sales &amp; Orders</span>
         <span style="font-size:10px;padding:2px 8px;border-radius:2px;background:var(--blue-bg);border:1px solid var(--blue-bd);color:var(--blue);">eCommerce Sync</span>
-        <span style="font-size:10px;padding:2px 8px;border-radius:2px;background:var(--coral-bg);border:1px solid var(--coral-bd);color:var(--coral);">Dispatch & Returns</span>
+        <span style="font-size:10px;padding:2px 8px;border-radius:2px;background:var(--coral-bg);border:1px solid var(--coral-bd);color:var(--coral);">Dispatch &amp; Returns</span>
       </div>
     </div>
   </div>
 </header>
+
+<!-- CHANGE LOG BANNER -->
+<div class="changelog-banner">
+  <div class="cl-dot"></div>
+  <div class="cl-text"><strong>v2.1 Changes — 25 May 2026 · Merlin Office Meeting:</strong> &nbsp;5 new requirements added across modules</div>
+  <span class="cl-tag">FG Recommendations</span>
+  <span class="cl-tag">FG Step Tracking</span>
+  <span class="cl-tag">WIP Tracking</span>
+  <span class="cl-tag">Return Traceability</span>
+  <span class="cl-tag">Pre-order Reserve</span>
+</div>
 
 <!-- LAYOUT -->
 <div class="page-body">
@@ -289,15 +374,62 @@ body {
       <a class="sb-item" href="#m07" onclick="setActive(this)"><span class="sb-dot" style="background:var(--blue)"></span>07 · eComm Sync</a>
       <a class="sb-item" href="#m08" onclick="setActive(this)"><span class="sb-dot" style="background:var(--blue)"></span>08 · Stock Sync</a>
       <a class="sb-item" href="#m09" onclick="setActive(this)"><span class="sb-dot" style="background:var(--amber)"></span>09 · Combo Orders</a>
-      <a class="sb-item" href="#m10" onclick="setActive(this)"><span class="sb-dot" style="background:var(--amber)"></span>10 · Sales Order</a>
+      <a class="sb-item" href="#m10" onclick="setActive(this)"><span class="sb-dot" style="background:var(--amber)"></span>10 · Sales Order <span class="sb-new">UPD</span></a>
       <a class="sb-item" href="#m11" onclick="setActive(this)"><span class="sb-dot" style="background:var(--amber)"></span>11 · Customization</a>
-      <a class="sb-item" href="#m12" onclick="setActive(this)"><span class="sb-dot" style="background:var(--coral)"></span>12 · Dispatch & POD</a>
-      <a class="sb-item" href="#m13" onclick="setActive(this)"><span class="sb-dot" style="background:var(--red)"></span>13 · Returns</a>
+      <a class="sb-item" href="#m12" onclick="setActive(this)"><span class="sb-dot" style="background:var(--coral)"></span>12 · Dispatch &amp; POD</a>
+      <a class="sb-item" href="#m13" onclick="setActive(this)"><span class="sb-dot" style="background:var(--red)"></span>13 · Returns <span class="sb-new">UPD</span></a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-label">New · 25 May 2026</div>
+      <a class="sb-item" href="#n01" onclick="setActive(this)"><span class="sb-dot" style="background:var(--gold)"></span>FG Recommendations</a>
+      <a class="sb-item" href="#m03" onclick="setActive(this)"><span class="sb-dot" style="background:var(--gold)"></span>FG Step Tracking</a>
+      <a class="sb-item" href="#m03" onclick="setActive(this)"><span class="sb-dot" style="background:var(--gold)"></span>WIP Tracking</a>
+      <a class="sb-item" href="#m13" onclick="setActive(this)"><span class="sb-dot" style="background:var(--gold)"></span>Return Traceability</a>
+      <a class="sb-item" href="#m10" onclick="setActive(this)"><span class="sb-dot" style="background:var(--gold)"></span>Pre-order Reserve</a>
     </div>
   </nav>
 
   <!-- CONTENT -->
   <main class="content">
+
+    <!-- ══ NEW ADDITION N-01: FG RECOMMENDATIONS ══ -->
+    <section class="module-section" id="n01">
+      <div class="module-header">
+        <span class="module-num">NEW</span>
+        <div>
+          <div class="module-title" style="color:var(--amber)">Order Intelligence — <em>FG Recommendations</em></div>
+          <div class="module-subtitle">Custom Module · ERP + Analytics Team — AI-assisted order matching</div>
+        </div>
+        <span class="module-badge" style="background:rgba(232,184,74,0.15);border:1px solid rgba(232,184,74,0.4);color:var(--amber);">25 May 2026</span>
+      </div>
+      <div class="flow">
+        <div class="step-cap cap-start">▶ Incoming Order / SO Draft</div>
+        <div class="conn"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
+
+        <div class="addition-block">
+          <div class="ab-label">Match Order Logic — Historical FG Recommendations</div>
+          <div class="ab-title">Smart FG Recommendation Engine</div>
+          <div class="ab-sub">When a new Sales Order is created (manually or via eCommerce sync), the system analyses historical order patterns for that customer / channel / SKU and recommends the best-matched Finished Goods from available stock — prioritising batch freshness, channel preference, and fulfilment history.</div>
+          <ul class="ab-list">
+            <li>Customer's past order history analysed → preferred SKU / variant surfaced on SO</li>
+            <li>Channel-level demand pattern used to pre-suggest items before SO confirmation</li>
+            <li>Recommends FG batch with nearest expiry or oldest received date (FEFO / FIFO)</li>
+            <li>Flags items frequently returned together → avoids recommending problem batches</li>
+            <li>Sales team sees suggested FG on SO creation screen — one-click accept</li>
+          </ul>
+          <div class="ab-chips">
+            <span class="ab-chip">⚙ Custom Script on SO DocType</span>
+            <span class="ab-chip">📊 ERPNext Stock Ledger + Sales History</span>
+            <span class="ab-chip">🔁 Frappe Scheduler — pattern refresh nightly</span>
+            <span class="ab-chip">👤 Sales Team</span>
+          </div>
+        </div>
+
+        <div class="conn"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
+        <div class="step-cap cap-end">✓ Best-matched FG suggested on SO</div>
+      </div>
+    </section>
+    <hr class="section-rule"/>
 
     <!-- ══ MODULE 01: PROCUREMENT ══ -->
     <section class="module-section" id="m01">
@@ -394,7 +526,7 @@ body {
     </section>
     <hr class="section-rule"/>
 
-    <!-- ══ MODULE 03: IN-HOUSE MANUFACTURING ══ -->
+    <!-- ══ MODULE 03: IN-HOUSE MANUFACTURING ══ (UPDATED with FG tracking + WIP) -->
     <section class="module-section" id="m03">
       <div class="module-header">
         <span class="module-num">03</span>
@@ -403,11 +535,28 @@ body {
           <div class="module-subtitle">Manufacturing Module · Production Planner → Operator → Supervisor</div>
         </div>
         <span class="module-badge" style="background:var(--indigo-bg);border:1px solid var(--indigo-bd);color:var(--indigo);">MFG</span>
-        <span class="badge-new">NEW</span>
+        <span class="badge-upd">UPDATED</span>
       </div>
       <div class="flow">
         <div class="step-cap cap-start">▶ Raw Stock Available</div>
         <div class="conn"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
+
+        <!-- FG Tracker bar — NEW -->
+        <div class="fg-tracker">
+          <div class="fg-tracker-title">🆕 Step-by-Step FG Tracking Across Workflow · 25 May 2026</div>
+          <div class="fg-stages">
+            <div class="fg-stage"><div class="fg-stage-box">Raw Material</div><div class="fg-arrow">→</div></div>
+            <div class="fg-stage"><div class="fg-stage-box">WIP (Work in Progress)</div><div class="fg-arrow">→</div></div>
+            <div class="fg-stage"><div class="fg-stage-box">Semi-Finished</div><div class="fg-arrow">→</div></div>
+            <div class="fg-stage"><div class="fg-stage-box">QC Inspection</div><div class="fg-arrow">→</div></div>
+            <div class="fg-stage"><div class="fg-stage-box">Finished Goods</div><div class="fg-arrow">→</div></div>
+            <div class="fg-stage"><div class="fg-stage-box">Dispatched</div><div class="fg-arrow">→</div></div>
+            <div class="fg-stage"><div class="fg-stage-box">Delivered / Returned</div></div>
+          </div>
+          <div style="font-size:10px;color:var(--teal);opacity:0.7;margin-top:8px;">Each stage has a dedicated Warehouse or DocType status · Full traceability via Batch No. and Serial No. throughout</div>
+        </div>
+
+        <div class="conn"><div class="conn-line" style="height:16px"></div><div class="conn-arrow"></div></div>
         <div class="step s-indigo">
           <div class="step-label">👤 Production Planner · Item Master Setup</div>
           <div class="step-title">Bill of Materials (BOM)</div>
@@ -427,7 +576,29 @@ body {
             <span class="pill s-indigo">⚙ Work Order DocType</span>
           </div>
         </div>
-        <div class="conn"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
+        <div class="conn"><div class="conn-line" style="height:16px"></div><div class="conn-arrow"></div></div>
+
+        <!-- NEW: WIP CREATION -->
+        <div class="addition-block">
+          <div class="ab-label">New · WIP (Work in Progress) Creation &amp; Tracking</div>
+          <div class="ab-title">WIP Stage — Before Manufacturing Order Execution</div>
+          <div class="ab-sub">Before the Work Order moves to full execution, raw materials are issued to production floor and moved into a dedicated WIP Warehouse. This creates a clear separation between raw stock, in-production stock, and finished goods — enabling accurate real-time inventory visibility at every stage.</div>
+          <ul class="ab-list">
+            <li>Stock Entry (Material Issue) → moves RM from Main WH to WIP Warehouse</li>
+            <li>WIP Warehouse acts as the production floor holding zone</li>
+            <li>Each Job Card references WIP batch — operator can see exactly what's on floor</li>
+            <li>WIP qty visible in live stock dashboard — separate from sellable stock</li>
+            <li>On Work Order complete → WIP consumed → FG posted to BIN WH for QC</li>
+          </ul>
+          <div class="ab-chips">
+            <span class="ab-chip">⚙ Stock Entry (Material Issue to WIP WH)</span>
+            <span class="ab-chip">🏭 WIP Warehouse (new WH node)</span>
+            <span class="ab-chip">📊 Real-time WIP stock report</span>
+            <span class="ab-chip">👤 Production Supervisor</span>
+          </div>
+        </div>
+
+        <div class="conn"><div class="conn-line" style="height:16px"></div><div class="conn-arrow"></div></div>
         <div class="step s-indigo">
           <div class="step-label">👤 Operator / Supervisor · Shop Floor</div>
           <div class="step-title">Job Cards — Per Operation</div>
@@ -448,9 +619,10 @@ body {
         <div class="step s-green">
           <div class="step-label">Manufacturing Module · Work Order Complete</div>
           <div class="step-title">Manufacture Item — Stock Entry</div>
-          <div class="step-sub">FG item stock posted to target WH · Raw material automatically consumed · Scrap posted to Scrap Warehouse</div>
+          <div class="step-sub">FG item stock posted to BIN WH for inbound QC · Raw material (WIP) automatically consumed · Scrap posted to Scrap Warehouse · FG Batch No. assigned here and tracked through all downstream steps</div>
           <div class="step-pills">
             <span class="pill s-green">⚙ Stock Entry (Manufacture type)</span>
+            <span class="pill s-green">🏷️ Batch No. assigned to FG</span>
           </div>
         </div>
         <div class="conn"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
@@ -476,9 +648,7 @@ body {
           <div class="step-label">👤 Purchase Manager · In-house capacity unavailable</div>
           <div class="step-title">Subcontracting Order</div>
           <div class="step-sub">BOM: Raw Bottle + Paint + Cap + Rubber · Vendor selected · Qty &amp; cost confirmed</div>
-          <div class="step-pills">
-            <span class="pill s-purple">⚙ Subcontracting Order DocType</span>
-          </div>
+          <div class="step-pills"><span class="pill s-purple">⚙ Subcontracting Order DocType</span></div>
         </div>
         <div class="conn"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
         <div class="step s-purple">
@@ -553,27 +723,15 @@ body {
         <div class="branch" style="max-width:680px;">
           <div class="branch-arm">
             <span class="branch-tag tag-fail">✗ Reject</span>
-            <div class="step s-red" style="width:100%;">
-              <div class="step-label">Stock Module</div>
-              <div class="step-title">Rejected Warehouse</div>
-              <div class="step-sub">Write-off or vendor debit note · Scrap valuation applied</div>
-            </div>
+            <div class="step s-red" style="width:100%;"><div class="step-label">Stock Module</div><div class="step-title">Rejected Warehouse</div><div class="step-sub">Write-off or vendor debit note · Scrap valuation applied</div></div>
           </div>
           <div class="branch-arm">
             <span class="branch-tag tag-pass">✓ Pass</span>
-            <div class="step s-green" style="width:100%;">
-              <div class="step-label">Stock Module</div>
-              <div class="step-title">Transfer → Main Warehouse</div>
-              <div class="step-sub">Auto-routed to correct WH based on channel / geography · BIN → Main WH</div>
-            </div>
+            <div class="step s-green" style="width:100%;"><div class="step-label">Stock Module</div><div class="step-title">Transfer → Main Warehouse</div><div class="step-sub">Auto-routed · BIN → Main WH · Batch status updated · FG tracking continues</div></div>
           </div>
           <div class="branch-arm">
             <span class="branch-tag tag-repair">⚙ Repair</span>
-            <div class="step s-amber" style="width:100%;">
-              <div class="step-label">Stock Module</div>
-              <div class="step-title">Fix / Repair WH</div>
-              <div class="step-sub">Repair Job Card raised · Technician assigned · Re-QC on completion</div>
-            </div>
+            <div class="step s-amber" style="width:100%;"><div class="step-label">Stock Module</div><div class="step-title">Fix / Repair WH</div><div class="step-sub">Repair Job Card raised · Technician assigned · Re-QC on completion</div></div>
           </div>
         </div>
         <div class="conn" style="margin-top:8px;"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
@@ -591,47 +749,24 @@ body {
           <div class="module-subtitle">Stock Module · Warehouse Manager — Structure &amp; Hierarchy</div>
         </div>
         <span class="module-badge" style="background:var(--slate-bg);border:1px solid var(--slate-bd);color:var(--slate);">Stock</span>
-        <span class="badge-new">NEW</span>
+        <span class="badge-upd">UPDATED</span>
       </div>
       <div class="flow">
         <div class="card-grid g-3" style="max-width:680px;">
-          <div class="card s-green">
-            <span class="card-icon">🏢</span>
-            <div class="card-title">Main Warehouse(s)</div>
-            <div class="card-sub">FG ready for sale · Per city/zone</div>
-            <ul><li>Mumbai Main WH</li><li>Delhi Main WH</li><li>Bangalore Main WH</li></ul>
-          </div>
-          <div class="card s-teal">
-            <span class="card-icon">🔲</span>
-            <div class="card-title">BIN / Holding WH</div>
-            <div class="card-sub">Inbound before QC clearance · Quarantine zone · No sales from here</div>
-          </div>
-          <div class="card s-amber">
-            <span class="card-icon">🔧</span>
-            <div class="card-title">Fix / Repair WH</div>
-            <div class="card-sub">Repair in progress · Awaiting re-QC · Rework items</div>
-          </div>
-          <div class="card s-red">
-            <span class="card-icon">🚫</span>
-            <div class="card-title">Rejected WH</div>
-            <div class="card-sub">Write-off candidates · Scrap valuation · Vendor debit</div>
-          </div>
-          <div class="card s-purple">
-            <span class="card-icon">🏭</span>
-            <div class="card-title">Virtual Sub-Contractor WH</div>
-            <div class="card-sub">Auto-created per vendor · Tracks materials sent out · Reconciled on receipt</div>
-          </div>
-          <div class="card s-coral">
-            <span class="card-icon">🛵</span>
-            <div class="card-title">Transit / Dark Store WH</div>
-            <div class="card-sub">Q-commerce: Zepto / Blinkit · Channel-specific · Real-time replenishment</div>
-          </div>
+          <div class="card s-green"><span class="card-icon">🏢</span><div class="card-title">Main Warehouse(s)</div><div class="card-sub">FG ready for sale · Per city/zone</div><ul><li>Mumbai Main WH</li><li>Delhi Main WH</li><li>Bangalore Main WH</li></ul></div>
+          <div class="card s-teal"><span class="card-icon">🔲</span><div class="card-title">BIN / Holding WH</div><div class="card-sub">Inbound before QC clearance · Quarantine zone · No sales from here</div></div>
+          <div class="card s-amber"><span class="card-icon">🔧</span><div class="card-title">Fix / Repair WH</div><div class="card-sub">Repair in progress · Awaiting re-QC · Rework items</div></div>
+          <div class="card s-red"><span class="card-icon">🚫</span><div class="card-title">Rejected WH</div><div class="card-sub">Write-off candidates · Scrap valuation · Vendor debit</div></div>
+          <div class="card s-purple"><span class="card-icon">🏭</span><div class="card-title">Virtual Sub-Contractor WH</div><div class="card-sub">Auto-created per vendor · Tracks materials sent out · Reconciled on receipt</div></div>
+          <div class="card s-coral"><span class="card-icon">🛵</span><div class="card-title">Transit / Dark Store WH</div><div class="card-sub">Q-commerce: Zepto / Blinkit · Channel-specific · Real-time replenishment</div></div>
+          <!-- NEW WIP WH card -->
+          <div class="card s-indigo card-new"><span class="card-icon">⚙️</span><div class="card-title">WIP Warehouse</div><div class="card-sub">Production floor holding · RM issued here before manufacture · Not sellable · Cleared on Work Order complete</div></div>
         </div>
         <div class="conn" style="margin-top:16px;"><div class="conn-line" style="height:14px"></div><div class="conn-arrow"></div></div>
         <div class="step s-slate" style="max-width:680px;">
           <div class="step-label">Inter-Warehouse Transfers</div>
           <div class="step-title">Stock Entry — WH to WH Movement</div>
-          <div class="step-sub">All inter-warehouse movements via Stock Entry DocType · Each WH has independent stock ledger · Reporting per WH available</div>
+          <div class="step-sub">All inter-warehouse movements via Stock Entry DocType · Each WH has independent stock ledger · Reporting per WH available · WIP WH added for production visibility</div>
         </div>
       </div>
     </section>
@@ -658,10 +793,7 @@ body {
           <div class="step-chips" style="margin-top:8px;">
             <span class="step-chip s-blue">⚡ Amazon</span>
             <span class="step-chip s-blue">🛍️ Flipkart</span>
-            <!-- <span class="step-chip s-blue">🏪 Meesho</span> -->
             <span class="step-chip s-blue">🟢 Shopify</span>
-            <!-- <span class="step-chip s-coral">⚡ Zepto</span>
-            <span class="step-chip s-coral">💛 Blinkit</span> -->
           </div>
         </div>
         <div class="conn"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
@@ -669,26 +801,14 @@ body {
           <div class="card s-blue">
             <span class="card-icon">🗺️</span>
             <div class="card-title">Auto Warehouse Allocation</div>
-            <div class="card-sub">Pincode-based routing — customer delivery pincode extracted from SO</div>
-            <ul>
-              <li>Pincode → Zone mapping table</li>
-              <li>Nearest WH with stock auto-assigned</li>
-              <li>If WH stock = 0 → fallback to next nearest</li>
-              <li>Q-commerce → dark store first</li>
-              <li>⏰ On SO submission, before pick list</li>
-            </ul>
+            <div class="card-sub">Pincode-based routing</div>
+            <ul><li>Pincode → Zone mapping table</li><li>Nearest WH with stock auto-assigned</li><li>If WH stock = 0 → fallback to next nearest</li><li>Q-commerce → dark store first</li><li>⏰ On SO submission, before pick list</li></ul>
           </div>
           <div class="card s-coral">
             <span class="card-icon">🚚</span>
             <div class="card-title">Auto Logistics Assignment</div>
             <div class="card-sub">HOW: Clickpost / Shiprocket via Frappe App</div>
-            <ul>
-              <li>Channel → preferred courier rule</li>
-              <li>Pincode serviceability check</li>
-              <li>Weight + dimension → rate card</li>
-              <li>COD vs Prepaid → different courier</li>
-              <li>AWB auto-generated in Delivery Note</li>
-            </ul>
+            <ul><li>Channel → preferred courier rule</li><li>Pincode serviceability check</li><li>Weight + dimension → rate card</li><li>COD vs Prepaid → different courier</li><li>AWB auto-generated in Delivery Note</li></ul>
           </div>
         </div>
         <div class="conn" style="margin-top:12px;"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
@@ -714,12 +834,12 @@ body {
         <div class="step s-blue">
           <div class="step-label">Frappe Scheduler / Webhook · Every stock ledger update</div>
           <div class="step-title">Live Inventory Push to All Channels</div>
-          <div class="step-sub">Available stock qty per item per warehouse pushed to each platform · Frequency: Real-time on ledger update OR scheduled every 15 min · Safety stock buffer applied · Out-of-stock → auto-deactivate listing</div>
+          <div class="step-sub">Available stock qty per item per warehouse pushed to each platform · Frequency: Real-time on ledger update OR scheduled every 15 min · Safety stock buffer applied · Out-of-stock → auto-deactivate listing · <strong>WIP stock excluded from sellable qty calculation</strong></div>
         </div>
         <div class="conn"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
         <div class="integ-bar s-blue" style="border:1.5px solid var(--blue-bd);border-radius:8px;padding:16px 18px;background:var(--blue-bg);">
           <div style="font-family:'Instrument Serif',serif;font-size:17px;color:var(--blue);margin-bottom:8px;">Platform Stock Push Map</div>
-          <div style="font-size:10.5px;color:var(--blue);opacity:0.75;margin-bottom:10px;">Each platform receives: Available Qty (WH mapped to channel) · Reserved Qty deducted · Safety stock buffer</div>
+          <div style="font-size:10.5px;color:var(--blue);opacity:0.75;margin-bottom:10px;">Each platform receives: Available Qty (WH mapped to channel) · Reserved Qty deducted · Safety stock buffer · WIP excluded</div>
           <div class="integ-chips">
             <span class="integ-chip s-blue">⚡ Amazon SP-API → Inventory Feed</span>
             <span class="integ-chip s-blue">🛍️ Flipkart → Inventory API</span>
@@ -728,7 +848,6 @@ body {
             <span class="integ-chip s-coral">⚡ Zepto → Portal / API</span>
             <span class="integ-chip s-coral">💛 Blinkit → Seller Portal / API</span>
           </div>
-          <div style="margin-top:10px;font-size:10px;color:var(--blue);opacity:0.65;">⚠️ Safety stock buffer to be defined per channel · Zero stock → auto-deactivate listing</div>
         </div>
         <div class="conn" style="margin-top:12px;"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
         <div class="step-cap cap-end">✓ All Platforms Updated</div>
@@ -751,21 +870,9 @@ body {
         <div class="step-cap cap-start">▶ Combo SKU Listed on Platform</div>
         <div class="conn"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
         <div class="card-grid g-3" style="max-width:680px;">
-          <div class="card s-amber">
-            <span class="card-icon">📦</span>
-            <div class="card-title">Product Bundle Setup</div>
-            <div class="card-sub">Create "Combo-X" as non-stocked Product Bundle DocType · Add components (e.g. Bag + Bottle + Lunch Box) · Bundle price = sum or custom</div>
-          </div>
-          <div class="card s-amber">
-            <span class="card-icon">🛒</span>
-            <div class="card-title">SO Processing</div>
-            <div class="card-sub">Order comes in as Bundle SKU → ERPNext auto-explodes to components on SO · Individual item stock reserved separately</div>
-          </div>
-          <div class="card s-amber">
-            <span class="card-icon">📊</span>
-            <div class="card-title">Stock &amp; Availability</div>
-            <div class="card-sub">Stock tracked per component · Combo availability = min(component stocks) · Composite qty pushed to platform</div>
-          </div>
+          <div class="card s-amber"><span class="card-icon">📦</span><div class="card-title">Product Bundle Setup</div><div class="card-sub">Create "Combo-X" as non-stocked Product Bundle DocType · Add components · Bundle price = sum or custom</div></div>
+          <div class="card s-amber"><span class="card-icon">🛒</span><div class="card-title">SO Processing</div><div class="card-sub">Order comes as Bundle SKU → auto-explodes to components on SO · Individual item stock reserved separately</div></div>
+          <div class="card s-amber"><span class="card-icon">📊</span><div class="card-title">Stock &amp; Availability</div><div class="card-sub">Stock tracked per component · Combo availability = min(component stocks) · Composite qty pushed to platform</div></div>
         </div>
         <div class="conn" style="margin-top:12px;"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
         <div class="step-cap cap-end">✓ Bundle Order Ready for Fulfilment</div>
@@ -773,7 +880,7 @@ body {
     </section>
     <hr class="section-rule"/>
 
-    <!-- ══ MODULE 10: SALES ORDER ══ -->
+    <!-- ══ MODULE 10: SALES ORDER ══ (UPDATED with pre-order reserve) -->
     <section class="module-section" id="m10">
       <div class="module-header">
         <span class="module-num">10</span>
@@ -782,6 +889,7 @@ body {
           <div class="module-subtitle">Selling Module · Sales Team / Auto-sync from eCommerce</div>
         </div>
         <span class="module-badge" style="background:var(--amber-bg);border:1px solid var(--amber-bd);color:var(--amber);">Selling</span>
+        <span class="badge-upd">UPDATED</span>
       </div>
       <div class="flow">
         <div class="step-cap cap-start">▶ Order Received</div>
@@ -808,9 +916,28 @@ body {
               <div class="step-sub">Stock may not be ready · Future delivery date confirmed · Multiple partial deliveries</div>
               <ul class="step-list">
                 <li>Multiple Delivery Notes (Fulfilment 1, 2 … N)</li>
-                <li>Stock reserved on availability</li>
                 <li>Balance qty tracked per SO line</li>
               </ul>
+            </div>
+            <div class="conn"><div class="conn-line" style="height:10px"></div><div class="conn-arrow"></div></div>
+            <!-- NEW: PRE-ORDER ITEM LEVEL RESERVE -->
+            <div class="addition-block" style="width:100%;">
+              <div class="ab-label">New · Pre-order Reserve at Individual Item Level</div>
+              <div class="ab-title">Item-level Stock Reservation for Pre-orders</div>
+              <div class="ab-sub">When a Pre-order SO is confirmed, each line item's quantity is reserved independently at the item level — not as a bundle. As stock becomes available (post-QC or post-manufacture), it is auto-allocated to the oldest waiting pre-order for that item.</div>
+              <ul class="ab-list">
+                <li>Each item on SO gets a dedicated stock reservation entry in ERPNext</li>
+                <li>Reserved qty deducted from "Available to Promise" (ATP) for that item</li>
+                <li>New stock (from QC pass or manufacture) auto-fills oldest pending reservation first</li>
+                <li>Customer notified when their reserved item is ready for dispatch</li>
+                <li>Partial release: if only some items are available, partial DN created for ready items</li>
+              </ul>
+              <div class="ab-chips">
+                <span class="ab-chip">⚙ ERPNext Reserved Qty field on SO</span>
+                <span class="ab-chip">📊 Stock Reservation Report</span>
+                <span class="ab-chip">🔁 Auto-allocation on QC pass</span>
+                <span class="ab-chip">👤 Sales + Warehouse Team</span>
+              </div>
             </div>
           </div>
           <div class="branch-arm">
@@ -834,26 +961,10 @@ body {
         </div>
         <div class="conn"><div class="conn-line" style="height:14px"></div><div class="conn-arrow"></div></div>
         <div class="card-grid g-4" style="max-width:680px;">
-          <div class="card s-teal" style="text-align:center;">
-            <span class="card-icon">⚡</span>
-            <div class="card-title">Quick Commerce</div>
-            <div class="card-sub">Zepto · Blinkit · Dark Store WH</div>
-          </div>
-          <div class="card s-purple" style="text-align:center;">
-            <span class="card-icon">🛍️</span>
-            <div class="card-title">E-Commerce</div>
-            <div class="card-sub">Amazon · Flipkart · Meesho · Shopify</div>
-          </div>
-          <div class="card s-slate" style="text-align:center;">
-            <span class="card-icon">🏢</span>
-            <div class="card-title">Offline B2B</div>
-            <div class="card-sub">Distributors · Bulk buyers · POD required</div>
-          </div>
-          <div class="card s-coral" style="text-align:center;">
-            <span class="card-icon">🏪</span>
-            <div class="card-title">Retail Stores</div>
-            <div class="card-sub">POS · Walk-in sales</div>
-          </div>
+          <div class="card s-teal" style="text-align:center;"><span class="card-icon">⚡</span><div class="card-title">Quick Commerce</div><div class="card-sub">Zepto · Blinkit · Dark Store WH</div></div>
+          <div class="card s-purple" style="text-align:center;"><span class="card-icon">🛍️</span><div class="card-title">E-Commerce</div><div class="card-sub">Amazon · Flipkart · Meesho · Shopify</div></div>
+          <div class="card s-slate" style="text-align:center;"><span class="card-icon">🏢</span><div class="card-title">Offline B2B</div><div class="card-sub">Distributors · Bulk buyers · POD required</div></div>
+          <div class="card s-coral" style="text-align:center;"><span class="card-icon">🏪</span><div class="card-title">Retail Stores</div><div class="card-sub">POS · Walk-in sales</div></div>
         </div>
         <div class="conn" style="margin-top:8px;"><div class="conn-line" style="height:14px"></div><div class="conn-arrow"></div></div>
         <div class="step-cap cap-end">✓ SO Confirmed → Pick Flow</div>
@@ -891,31 +1002,15 @@ body {
         <div class="branch" style="max-width:680px;">
           <div class="branch-arm">
             <span class="branch-tag tag-yes">Yes</span>
-            <div class="step s-amber" style="width:100%;">
-              <div class="step-label">Custom DocType — Auto-created on SO submit</div>
-              <div class="step-title">Customization Job Card</div>
-              <div class="step-sub">Linked to SO · Machine assigned · Artwork uploaded · Operator assigned</div>
-            </div>
+            <div class="step s-amber" style="width:100%;"><div class="step-label">Custom DocType — Auto-created on SO submit</div><div class="step-title">Customization Job Card</div><div class="step-sub">Linked to SO · Machine assigned · Artwork uploaded · Operator assigned</div></div>
             <div class="conn"><div class="conn-line" style="height:10px"></div><div class="conn-arrow"></div></div>
-            <div class="step s-amber" style="width:100%;">
-              <div class="step-label">In-House Production</div>
-              <div class="step-title">Image Printing / Name Engraving</div>
-              <div class="step-sub">Artwork applied · Pre-dispatch QC check · Time + scrap tracked on Job Card</div>
-            </div>
+            <div class="step s-amber" style="width:100%;"><div class="step-label">In-House Production</div><div class="step-title">Image Printing / Name Engraving</div><div class="step-sub">Artwork applied · Pre-dispatch QC check · Time + scrap tracked on Job Card</div></div>
             <div class="conn"><div class="conn-line" style="height:10px"></div><div class="conn-arrow"></div></div>
-            <div class="step s-green" style="width:100%;">
-              <div class="step-label">Job Card Closed</div>
-              <div class="step-title">Customization Complete</div>
-              <div class="step-sub">Dispatch unlocked · Delivery Note creation unblocked</div>
-            </div>
+            <div class="step s-green" style="width:100%;"><div class="step-label">Job Card Closed</div><div class="step-title">Customization Complete</div><div class="step-sub">Dispatch unlocked · Delivery Note creation unblocked</div></div>
           </div>
           <div class="branch-arm">
             <span class="branch-tag tag-no">No</span>
-            <div class="step s-slate" style="width:100%;">
-              <div class="step-label">Skip customization</div>
-              <div class="step-title">Proceed to Dispatch</div>
-              <div class="step-sub">No job card needed · Pick list created directly</div>
-            </div>
+            <div class="step s-slate" style="width:100%;"><div class="step-label">Skip customization</div><div class="step-title">Proceed to Dispatch</div><div class="step-sub">No job card needed · Pick list created directly</div></div>
           </div>
         </div>
         <div class="conn" style="margin-top:8px;"><div class="conn-line" style="height:20px"></div><div class="conn-arrow"></div></div>
@@ -954,7 +1049,7 @@ body {
             <span class="step-chip s-coral">📸 Photo Evidence</span>
             <span class="step-chip s-coral">🧾 Tax Invoice Copy</span>
           </div>
-          <div style="font-size:10px;color:var(--coral);opacity:0.7;margin-top:6px;">B2B: Mandatory attachment rule enforced via Validation Script · Deliver Note → Attach Files</div>
+          <div style="font-size:10px;color:var(--coral);opacity:0.7;margin-top:6px;">B2B: Mandatory attachment rule enforced via Validation Script</div>
         </div>
         <div class="conn"><div class="conn-line" style="height:18px"></div><div class="conn-arrow"></div></div>
         <div class="step s-coral">
@@ -966,7 +1061,7 @@ body {
         <div class="step s-blue">
           <div class="step-label">Logistics Integration · Clickpost · On AWB creation</div>
           <div class="step-title">Clickpost — Unified Tracking &amp; Status Mask</div>
-          <div class="step-sub">AWB pushed to Clickpost → unified tracking across all courier partners · Delivery status webhooks back to ERPNext · Courier status codes normalized to Merlin's standard labels</div>
+          <div class="step-sub">AWB pushed to Clickpost → unified tracking across all courier partners · Delivery status webhooks back to ERPNext · Courier status codes normalised to Merlin's standard labels</div>
           <div class="step-chips" style="margin-top:8px;">
             <span class="step-chip s-blue">📦 Pickup Scheduled</span>
             <span class="step-chip s-blue">🚚 In Transit</span>
@@ -988,7 +1083,7 @@ body {
     </section>
     <hr class="section-rule"/>
 
-    <!-- ══ MODULE 13: RETURNS ══ -->
+    <!-- ══ MODULE 13: RETURNS ══ (UPDATED with end-to-end traceability) -->
     <section class="module-section" id="m13">
       <div class="module-header">
         <span class="module-num">13</span>
@@ -997,6 +1092,7 @@ body {
           <div class="module-subtitle">Selling Module · CS Team → QC Team — Return Triage &amp; Stock Routing</div>
         </div>
         <span class="module-badge" style="background:var(--red-bg);border:1px solid var(--red-bd);color:var(--red);">Returns</span>
+        <span class="badge-upd">UPDATED</span>
       </div>
       <div class="flow">
         <div class="step-cap cap-start">▶ Post Delivery</div>
@@ -1024,37 +1120,43 @@ body {
               <div class="step-sub">Return reason code logged · Returned stock received at BIN WH · Clickpost RTO tracking auto-matched</div>
             </div>
             <div class="conn"><div class="conn-line" style="height:10px"></div><div class="conn-arrow"></div></div>
+            <!-- NEW: END-TO-END RETURN TRACEABILITY -->
+            <div class="addition-block" style="width:100%;">
+              <div class="ab-label">New · End-to-End Traceability for Return Orders</div>
+              <div class="ab-title">Return Traceability Chain</div>
+              <div class="ab-sub">Every return order is fully traceable back to its original Sales Order, Delivery Note, Batch No., and even the Manufacturing / Subcontracting source. This allows Merlin to identify whether a return is linked to a specific production batch, vendor, or courier — enabling root-cause analysis and vendor accountability.</div>
+              <ul class="ab-list">
+                <li>Sales Return links back to original SO, DN, Sales Invoice — one click history</li>
+                <li>Batch No. on returned item traced back to Work Order / Subcontracting Receipt</li>
+                <li>If multiple returns from same batch → batch flagged for investigation</li>
+                <li>Return reason + QC result linked to original vendor / production operator record</li>
+                <li>Traceability report: Batch → Original PO/WO → QC pass → SO → DN → Return → QC → Final WH</li>
+                <li>Clickpost RTO tracking ID linked to Sales Return DocType</li>
+              </ul>
+              <div class="ab-chips">
+                <span class="ab-chip">🔗 Linked Documents chain in ERPNext</span>
+                <span class="ab-chip">🏷️ Batch No. throughout lifecycle</span>
+                <span class="ab-chip">📊 Return Traceability Report</span>
+                <span class="ab-chip">⚙ Custom Script on Sales Return</span>
+                <span class="ab-chip">👤 QC + Ops Teams</span>
+              </div>
+            </div>
+            <div class="conn"><div class="conn-line" style="height:10px"></div><div class="conn-arrow"></div></div>
             <div class="step s-teal" style="width:100%;">
               <div class="step-label">Quality Module — Return QC Template · QC Team</div>
               <div class="step-title">Return QC Inspection</div>
-              <div class="step-sub">Condition assessed: Good · Repairable · Fully Damaged</div>
+              <div class="step-sub">Condition assessed: Good · Repairable · Fully Damaged · QC result linked to traceability record</div>
             </div>
             <div class="conn"><div class="conn-line" style="height:10px"></div><div class="conn-arrow"></div></div>
             <div class="card-grid g-3" style="max-width:100%;">
-              <div class="card s-green" style="text-align:center;">
-                <span class="card-icon">🏢</span>
-                <div class="card-title">Good</div>
-                <div class="card-sub">Main Warehouse · Resellable · Back to stock</div>
-              </div>
-              <div class="card s-amber" style="text-align:center;">
-                <span class="card-icon">🔧</span>
-                <div class="card-title">Repair</div>
-                <div class="card-sub">Fix WH · Repair Job Card · Re-QC</div>
-              </div>
-              <div class="card s-red" style="text-align:center;">
-                <span class="card-icon">🚫</span>
-                <div class="card-title">Reject</div>
-                <div class="card-sub">Rejected WH · Write-off · Scrap</div>
-              </div>
+              <div class="card s-green" style="text-align:center;"><span class="card-icon">🏢</span><div class="card-title">Good</div><div class="card-sub">Main Warehouse · Resellable · Back to stock</div></div>
+              <div class="card s-amber" style="text-align:center;"><span class="card-icon">🔧</span><div class="card-title">Repair</div><div class="card-sub">Fix WH · Repair Job Card · Re-QC</div></div>
+              <div class="card s-red" style="text-align:center;"><span class="card-icon">🚫</span><div class="card-title">Reject</div><div class="card-sub">Rejected WH · Write-off · Scrap</div></div>
             </div>
           </div>
           <div class="branch-arm" style="flex:0.6;">
             <span class="branch-tag tag-pass">No Return</span>
-            <div class="step s-green" style="width:100%;">
-              <div class="step-label">Transaction Complete</div>
-              <div class="step-title">Cycle Complete</div>
-              <div class="step-sub">No action needed · Order fully closed</div>
-            </div>
+            <div class="step s-green" style="width:100%;"><div class="step-label">Transaction Complete</div><div class="step-title">Cycle Complete</div><div class="step-sub">No action needed · Order fully closed</div></div>
           </div>
         </div>
         <div class="conn" style="margin-top:8px;"><div class="conn-line" style="height:24px"></div><div class="conn-arrow"></div></div>
@@ -1062,13 +1164,13 @@ body {
       </div>
     </section>
 
-  </main><!-- /content -->
-</div><!-- /page-body -->
+  </main>
+</div>
 
 <!-- FOOTER -->
 <footer class="page-footer">
   <div class="footer-brand">Merlin<em>.</em></div>
-  <div class="footer-meta">Business Workflow v2.0 · ERPNext v16 · Frappe Framework · Post-MOM Update · 06 May 2025 · Confidential</div>
+  <div class="footer-meta">Business Workflow v2.1 · ERPNext v16 · Frappe Framework · Updated 25 May 2026 · Merlin Office · Confidential</div>
 </footer>
 
 <script>
@@ -1076,27 +1178,20 @@ function setActive(el) {
   document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
   el.classList.add('active');
 }
-
-// Highlight sidebar item on scroll
 const sections = document.querySelectorAll('.module-section');
 const sidebarLinks = document.querySelectorAll('.sb-item');
-
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const id = entry.target.id;
       sidebarLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + id) {
-          link.classList.add('active');
-        }
+        if (link.getAttribute('href') === '#' + id) link.classList.add('active');
       });
     }
   });
-}, { threshold: 0.3, rootMargin: '-80px 0px -40% 0px' });
-
+}, { threshold: 0.25, rootMargin: '-80px 0px -40% 0px' });
 sections.forEach(s => observer.observe(s));
 </script>
-
 </body>
 </html>
